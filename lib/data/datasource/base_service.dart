@@ -1,45 +1,23 @@
+import 'package:clean_architecture_getx/utils/constants.dart';
 import 'package:get/get_connect/connect.dart';
+import 'package:get/get_connect/http/src/request/request.dart';
+import 'package:get_storage/get_storage.dart';
 
 class BaseService extends GetConnect {
+  final box = GetStorage();
   @override
   void onInit() {    // add your local storage here to load for every request
-    var token = "dd";
-    httpClient.baseUrl = "http://base_url here";    //2.
+    var token = box.read(Constants.keyToken);
+    httpClient.baseUrl = "https://reqres.in/";    //2.
     httpClient.defaultContentType = "application/json";
-    httpClient.timeout = Duration(seconds: 8);
-    httpClient.addResponseModifier((request, response) async {
-      print(response.body);
-    });
-    httpClient.addRequestModifier((request) async {
-      // add request here
-      print(request.headers);
-      return request;
-    });
+    httpClient.timeout = const Duration(seconds: 8);
 
     var headers = {'Authorization': "Bearer $token"};
-    httpClient.addAuthenticator((request) async {
+    httpClient.addAuthenticator((Request request) async {
       request.headers.addAll(headers);
       return request;
     });
 
     super.onInit();
-  }
-
-  dynamic errorHandler(Response response) {
-    print(response.toString());
-    switch (response.statusCode) {
-      case 200:
-      case 201:
-      case 202:
-        var responseJson = response.body;
-        return responseJson;
-      case 500:
-        throw "Server Error pls retry later";
-      case 403:
-        throw 'Error occurred pls check internet and retry.';
-      case 500:
-      default:
-        throw 'Error occurred retry';
-    }
   }
 }
