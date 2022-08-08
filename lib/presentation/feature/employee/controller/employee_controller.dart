@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:clean_architecture_getx/domain/entities/employee_params.dart';
 import 'package:clean_architecture_getx/domain/entities/employee_query.dart';
@@ -26,7 +25,7 @@ class EmployeeController extends GetxController with StateMixin<List<EmployeePro
     change(employeeProfiles,status: RxStatus.loading());
     var params = EmployeeParams();
     params.employeeType = EmployeeType.getUser;
-    params.employeeQuery = EmployeeQuery(page: 2);
+    params.employeeQuery = EmployeeQuery(page: "1");
     final result = await _employeeUseCase.call(params);
     switch(result.requestStatus){
 

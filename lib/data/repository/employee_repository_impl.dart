@@ -15,9 +15,9 @@ class EmployeeRepositoryImpl extends EmployeeRepository{
   @override
   Future<EmployeeResult> getEmployee({required EmployeeQuery query}) async {
     var employeeResult = EmployeeResult();
-    final apiResponse = await _apiDataSource.getEmployee(query);
-    employeeResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
     try{
+      final apiResponse = await _apiDataSource.getEmployee(query);
+      employeeResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
       switch(employeeResult.requestStatus){
 
         case RequestStatus.success:

@@ -18,9 +18,9 @@ class LoginRepositoryImpl extends LoginRepository{
   @override
   Future<LoginResult> loginWithPassword({required LoginBodyWithPassword body}) async {
     var loginResult = LoginResult();
-    final apiResponse  = await _apiDataSource.loginWithPassword(body);
-    loginResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
     try{
+      final apiResponse  = await _apiDataSource.loginWithPassword(body);
+      loginResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
       switch(loginResult.requestStatus){
 
         case RequestStatus.success:

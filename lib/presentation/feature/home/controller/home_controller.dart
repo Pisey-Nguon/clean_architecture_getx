@@ -3,6 +3,7 @@ import 'package:clean_architecture_getx/domain/entities/login_params.dart';
 import 'package:clean_architecture_getx/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture_getx/routes/app_routes.dart';
 import 'package:clean_architecture_getx/utils/constants.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -33,6 +34,10 @@ class HomeController extends GetxController{
   }
 
   Future<void> loginWithPassword() async {
+    Get.defaultDialog(
+        title: "Loading",
+        content: const CircularProgressIndicator()
+    );
     var loginParams = LoginParams();
     loginParams.loginType = LoginType.loginWithPassword;
     loginParams.loginBodyWithPassword = LoginBodyWithPassword(email: emailEditController.value.text,password: passwordEditController.value.text);
@@ -40,9 +45,11 @@ class HomeController extends GetxController{
     switch(loginResult.requestStatus){
 
       case RequestStatus.success:
-        headerText.value = "Login Success";
+        Get.back();
         box.write(Constants.keyToken, loginResult.successResponse!.token);
-        Get.toNamed(AppRoutes.employee);
+        Future.delayed(Duration(milliseconds: 500),(){
+          Get.toNamed(AppRoutes.employee);
+        });
         break;
       case RequestStatus.noInternet:
         headerText.value = "No Internet";

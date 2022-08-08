@@ -12,7 +12,8 @@ class ApiDataSource extends BaseService{
   }
 
   Future<Response> getEmployee(EmployeeQuery query) async {
-    return await get("api/users",query: query.toJson());
+    var response =  await get("api/users",query: query.toJson());
+    return response;
   }
 
 }

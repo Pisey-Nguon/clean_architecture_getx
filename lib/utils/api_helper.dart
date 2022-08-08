@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:clean_architecture_getx/bases/base_result.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
+import 'package:get/get_connect/http/src/status/http_status.dart';
 
 class ApiHelper{
   static final ApiHelper _apiHelper = ApiHelper._internal();
@@ -7,17 +10,21 @@ class ApiHelper{
     return _apiHelper;
   }
   static RequestStatus errorHandler({required Response apiResponse}) {
-    switch (apiResponse.statusCode) {
-      case 200:
-      case 201:
-      case 202:
-        return RequestStatus.success;
-      case 500:
-        return RequestStatus.failed;
-      case 403:
-        return RequestStatus.noInternet;
-      default:
-        return RequestStatus.failed;
+    var status = HttpStatus(apiResponse.statusCode);
+    if(status.isOk){
+      return RequestStatus.success;
+    }else if(status.isServerError){
+      return RequestStatus.failed;
+    }else if(status.isForbidden){
+      return RequestStatus.failed;
+    }else if(status.isNotFound){
+      return RequestStatus.failed;
+    }else if(status.isUnauthorized){
+      return RequestStatus.failed;
+    }else if(status.connectionError){
+      return RequestStatus.noInternet;
+    }else{
+      return RequestStatus.failed;
     }
   }
 

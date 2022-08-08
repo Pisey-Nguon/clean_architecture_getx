@@ -12,7 +12,6 @@ class EmployeePage extends GetView<EmployeeController> {
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
-
   }
 
   AppBar _buildAppBar() {
@@ -24,24 +23,51 @@ class EmployeePage extends GetView<EmployeeController> {
   Widget _buildBody() {
     return Container(
       child: controller.obx(
-              (state) => ListView.builder(
+          (state) => ListView.builder(
                 itemCount: state!.length,
-                itemBuilder: (context,index)=>_itemEmployeeProfile(state[index]),
+                itemBuilder: (context, index) =>
+                    _itemEmployeeProfile(state[index]),
               ),
-        onLoading: Center(child: CircularProgressIndicator()),
-        onEmpty: Center(child: Text("Empty"),),
-        onError:(e)=> Center(child: Text(e.toString()),)
-      ),
+          onLoading: Center(child: CircularProgressIndicator()),
+          onEmpty: Center(
+            child: Text("Empty"),
+          ),
+          onError: (e) => Center(
+                child: Text(e.toString()),
+              )),
     );
   }
 
-  Widget _itemEmployeeProfile(EmployeeProfile employeeProfile){
+  Widget _itemEmployeeProfile(EmployeeProfile employeeProfile) {
     return Container(
-      height: 50,
-      color: Colors.amber[100],
-      child: Center(child: Text(employeeProfile.firstName.toString()),),
+        height: 50,
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Row(
+                  children: [
+                    SizedBox(width: 10,),
+                    Container(
+                      width: 40,
+                      height: 40,
+                      child: ClipRRect (
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(employeeProfile.avatar.toString()),
+                      ),
+                    ),
+                    SizedBox(width: 10,),
+                    Text(employeeProfile.firstName.toString())
+                  ]
+              ),
+            ),
+            Container(
+              color: Colors.black12,
+              width: Get.width,
+              height: 1,
+            )
+          ],
+        )
     );
   }
-
-
 }
