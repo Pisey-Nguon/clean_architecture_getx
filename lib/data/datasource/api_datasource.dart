@@ -8,7 +8,9 @@ import '../../domain/entities/login_response.dart';
 class ApiDataSource extends BaseService{
 
   Future<Response<dynamic>> loginWithPassword(LoginBodyWithPassword body) async {
-    return await post("api/login", body.toJson());
+    var response = await post("api/login", body.toJson());
+    print(response.statusText);
+    return response;
   }
 
   Future<Response> getEmployee(EmployeeQuery query) async {

@@ -37,6 +37,7 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.0.3
   email_validator: ^2.0.1
+  flutter_displaymode: ^0.4.0
 
 dev_dependencies:
   flutter_test:
