@@ -24,7 +24,7 @@ class HomeController extends GetxController{
   final box = GetStorage();
 
   final formKey = GlobalKey<FormState>();
-  var rememberValue = false;
+  var rememberValue = false.obs;
 
   @override
   void onInit() {

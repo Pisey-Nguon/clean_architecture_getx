@@ -85,15 +85,18 @@ class HomePage extends GetView<HomeController> {
                           ),
                         ),
                       ),
-                      CheckboxListTile(
-                        title: const Text("Remember me"),
-                        contentPadding: EdgeInsets.zero,
-                        value: controller.rememberValue,
-                        activeColor: Theme.of(context).colorScheme.primary,
-                        onChanged: (newValue) {
-                          controller.rememberValue = newValue!;
-                        },
-                        controlAffinity: ListTileControlAffinity.leading,
+                      Obx(() {
+                          return CheckboxListTile(
+                            title: const Text("Remember me"),
+                            contentPadding: EdgeInsets.zero,
+                            value: controller.rememberValue.value,
+                            activeColor: Theme.of(context).colorScheme.primary,
+                            onChanged: (newValue) {
+                              controller.rememberValue.value = newValue!;
+                            },
+                            controlAffinity: ListTileControlAffinity.leading,
+                          );
+                        }
                       ),
                       const SizedBox(
                         height: 20,
