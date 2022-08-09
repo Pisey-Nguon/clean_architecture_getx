@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../../domain/entities/login_result.dart';
-import '../../../../bases/base_result.dart';
+import '../../../../base/base_result.dart';
 
 class HomeController extends GetxController{
 

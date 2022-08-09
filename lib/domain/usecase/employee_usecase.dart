@@ -1,6 +1,5 @@
 import 'package:clean_architecture_getx/domain/entities/employee_result.dart';
-import 'package:clean_architecture_getx/bases/base_usecase.dart';
-import 'package:clean_architecture_getx/bases/base_result.dart';
+import 'package:clean_architecture_getx/base/base_usecase.dart';
 import 'package:clean_architecture_getx/domain/repository/employee_repository.dart';
 
 import '../entities/employee_params.dart';

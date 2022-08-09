@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:clean_architecture_getx/bases/base_result.dart';
+import 'package:clean_architecture_getx/base/base_result.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get/get_connect/http/src/status/http_status.dart';
 

@@ -5,7 +5,7 @@ import 'package:clean_architecture_getx/domain/entities/employee_response.dart';
 import 'package:clean_architecture_getx/domain/usecase/employee_usecase.dart';
 import 'package:get/get.dart';
 
-import '../../../../bases/base_result.dart';
+import '../../../../base/base_result.dart';
 
 class EmployeeController extends GetxController with StateMixin<List<EmployeeProfile>>{
 
