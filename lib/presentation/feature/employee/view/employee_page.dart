@@ -40,7 +40,7 @@ class EmployeePage extends GetView<EmployeeController> {
 
   Widget _itemEmployeeProfile(EmployeeProfile employeeProfile) {
     return Container(
-        height: 50,
+        height: 70,
         child: Column(
           children: [
             Expanded(
@@ -49,8 +49,8 @@ class EmployeePage extends GetView<EmployeeController> {
                   children: [
                     SizedBox(width: 10,),
                     Container(
-                      width: 40,
-                      height: 40,
+                      width: 50,
+                      height: 50,
                       child: ClipRRect (
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(employeeProfile.avatar.toString()),
