@@ -47,18 +47,21 @@ class HomeController extends GetxController{
       case RequestStatus.success:
         Get.back();
         box.write(Constants.keyToken, loginResult.successResponse!.token);
-        Future.delayed(Duration(milliseconds: 500),(){
+        Future.delayed(const Duration(milliseconds: 500),(){
           Get.toNamed(AppRoutes.employee);
         });
         break;
       case RequestStatus.noInternet:
         headerText.value = "No Internet";
+        Get.back();
         break;
       case RequestStatus.failed:
         headerText.value = loginResult.errorResponse!.error!;
+        Get.back();
         break;
       case RequestStatus.somethingWentWrong:
         headerText.value = "Something went wrong";
+        Get.back();
         break;
     }
   }
