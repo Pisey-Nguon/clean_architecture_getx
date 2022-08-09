@@ -1,7 +1,6 @@
-import 'package:clean_architecture_getx/domain/entities/login_body_with_password.dart';
 import 'package:clean_architecture_getx/domain/entities/login_params.dart';
 import 'package:clean_architecture_getx/domain/repository/login_repository.dart';
-import 'package:clean_architecture_getx/bases/base_usecase.dart';
+import 'package:clean_architecture_getx/base/base_usecase.dart';
 
 import '../entities/login_result.dart';
 

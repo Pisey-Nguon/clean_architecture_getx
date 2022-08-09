@@ -5,9 +5,8 @@ import 'package:clean_architecture_getx/domain/entities/login_body_with_password
 import 'package:clean_architecture_getx/domain/entities/login_response.dart';
 import 'package:clean_architecture_getx/domain/repository/login_repository.dart';
 import 'package:clean_architecture_getx/utils/api_helper.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
 
-import '../../bases/base_result.dart';
+import '../../base/base_result.dart';
 
 class LoginRepositoryImpl extends LoginRepository{
 
