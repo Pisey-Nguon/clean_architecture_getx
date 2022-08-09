@@ -16,7 +16,7 @@ class EmployeePage extends GetView<EmployeeController> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text("Employee"),
+      title: const Text("Employee"),
     );
   }
 
@@ -28,8 +28,8 @@ class EmployeePage extends GetView<EmployeeController> {
                 itemBuilder: (context, index) =>
                     _itemEmployeeProfile(state[index]),
               ),
-          onLoading: Center(child: CircularProgressIndicator()),
-          onEmpty: Center(
+          onLoading: const Center(child: CircularProgressIndicator()),
+          onEmpty: const Center(
             child: Text("Empty"),
           ),
           onError: (e) => Center(
@@ -39,35 +39,48 @@ class EmployeePage extends GetView<EmployeeController> {
   }
 
   Widget _itemEmployeeProfile(EmployeeProfile employeeProfile) {
-    return Container(
-        height: 70,
-        child: Column(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Row(
-                  children: [
-                    SizedBox(width: 10,),
-                    Container(
-                      width: 50,
-                      height: 50,
-                      child: ClipRRect (
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(employeeProfile.avatar.toString()),
+    return InkWell(
+      onTap: (){
+
+      },
+      child: SizedBox(
+          height: 150,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Row(
+                    children: [
+                      const SizedBox(width: 10,),
+                      Container(
+                        width: 140,
+                        height: 140,
+                        child: ClipRRect (
+                          borderRadius: BorderRadius.circular(30),
+                          child: Image.network(employeeProfile.avatar.toString()),
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 10,),
-                    Text(employeeProfile.firstName.toString())
-                  ]
+                      const SizedBox(width: 10,),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('${employeeProfile.firstName} ${employeeProfile.lastName}'),
+                          Text(employeeProfile.email.toString())
+                        ],
+                      )
+
+                    ]
+                ),
               ),
-            ),
-            Container(
-              color: Colors.black12,
-              width: Get.width,
-              height: 1,
-            )
-          ],
-        )
+              Container(
+                color: Colors.black12,
+                width: Get.width,
+                height: 1,
+              )
+            ],
+          )
+      ),
     );
   }
 }
