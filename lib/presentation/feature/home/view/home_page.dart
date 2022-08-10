@@ -1,7 +1,6 @@
 import 'package:clean_architecture_getx/presentation/feature/home/controller/home_controller.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 class HomePage extends GetView<HomeController> {
@@ -17,7 +16,7 @@ class HomePage extends GetView<HomeController> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: Text("Login"),
+      title: const Text("Login"),
     );
   }
 
@@ -37,7 +36,7 @@ class HomePage extends GetView<HomeController> {
                   () => Text(
                     controller.headerText.value,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
                     ),
@@ -86,18 +85,17 @@ class HomePage extends GetView<HomeController> {
                         ),
                       ),
                       Obx(() {
-                          return CheckboxListTile(
-                            title: const Text("Remember me"),
-                            contentPadding: EdgeInsets.zero,
-                            value: controller.rememberValue.value,
-                            activeColor: Theme.of(context).colorScheme.primary,
-                            onChanged: (newValue) {
-                              controller.rememberValue.value = newValue!;
-                            },
-                            controlAffinity: ListTileControlAffinity.leading,
-                          );
-                        }
-                      ),
+                        return CheckboxListTile(
+                          title: const Text("Remember me"),
+                          contentPadding: EdgeInsets.zero,
+                          value: controller.rememberValue.value,
+                          activeColor: Theme.of(context).colorScheme.primary,
+                          onChanged: (newValue) {
+                            controller.rememberValue.value = newValue!;
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                        );
+                      }),
                       const SizedBox(
                         height: 20,
                       ),

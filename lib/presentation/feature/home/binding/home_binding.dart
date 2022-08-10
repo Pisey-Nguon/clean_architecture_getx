@@ -4,7 +4,7 @@ import 'package:clean_architecture_getx/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture_getx/presentation/feature/home/controller/home_controller.dart';
 import 'package:get/get.dart';
 
-class HomeBinding extends Bindings{
+class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<LoginRepository>(LoginRepositoryImpl(apiDataSource: Get.find()));

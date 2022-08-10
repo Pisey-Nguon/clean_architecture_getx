@@ -1,13 +1,11 @@
 import 'package:clean_architecture_getx/main_binding.dart';
-import 'package:clean_architecture_getx/presentation/feature/home/binding/home_binding.dart';
-import 'package:clean_architecture_getx/presentation/feature/home/view/home_page.dart';
 import 'package:clean_architecture_getx/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-void main()async {
+void main() async {
   await GetStorage.init();
   await FlutterDisplayMode.setHighRefreshRate();
   runApp(const MyApp());

@@ -5,23 +5,25 @@ import 'package:clean_architecture_getx/domain/entities/employee_result.dart';
 import 'package:clean_architecture_getx/domain/repository/employee_repository.dart';
 import 'package:clean_architecture_getx/utils/api_helper.dart';
 
-import '../../domain/entities/error_response.dart';
 import '../../base/base_result.dart';
 
-class EmployeeRepositoryImpl extends EmployeeRepository{
+class EmployeeRepositoryImpl extends EmployeeRepository {
   final ApiDataSource _apiDataSource;
 
-  EmployeeRepositoryImpl({required ApiDataSource apiDataSource}):_apiDataSource = apiDataSource;
+  EmployeeRepositoryImpl({required ApiDataSource apiDataSource})
+      : _apiDataSource = apiDataSource;
   @override
-  Future<EmployeeResult> getEmployee({required EmployeeQuery query}) async {
+  Future<EmployeeResult> getEmployee({required EmployeeQuery employeeQuery}) async {
+    _apiDataSource.printQuery(employeeQuery.toJson());
     var employeeResult = EmployeeResult();
-    try{
-      final apiResponse = await _apiDataSource.getEmployee(query);
-      employeeResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
-      switch(employeeResult.requestStatus){
-
+    try {
+      final apiResponse = await _apiDataSource.getEmployee(employeeQuery: employeeQuery);
+      employeeResult.requestStatus =
+          ApiHelper.errorHandler(apiResponse: apiResponse);
+      switch (employeeResult.requestStatus) {
         case RequestStatus.success:
-          employeeResult.successResponse = EmployeeResponse.fromJson(apiResponse.body);
+          employeeResult.successResponse =
+              EmployeeResponse.fromJson(apiResponse.body);
           break;
         case RequestStatus.noInternet:
           break;
@@ -31,11 +33,11 @@ class EmployeeRepositoryImpl extends EmployeeRepository{
         case RequestStatus.somethingWentWrong:
           break;
       }
-    }catch(e){
+    } catch (e) {
+      _apiDataSource.printErrorService(e.toString());
       employeeResult.requestStatus = RequestStatus.somethingWentWrong;
     }
 
     return employeeResult;
   }
-
 }

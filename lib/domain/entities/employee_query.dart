@@ -1,15 +1,17 @@
 class EmployeeQuery {
-  String? page;
+  final String page;
+  final int perPage;
 
-  EmployeeQuery({this.page});
+  EmployeeQuery({required this.page,required this.perPage});
 
-  EmployeeQuery.fromJson(Map<String, dynamic> json) {
-    page = json['page'];
+  factory EmployeeQuery.fromJson(Map<String, dynamic> json) {
+    return EmployeeQuery(page: json["page"], perPage: json["per_page"]);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['page'] = this.page;
-    return data;
+    return {
+      "page": page,
+      "per_page": perPage
+    };
   }
 }

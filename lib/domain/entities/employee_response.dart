@@ -8,11 +8,11 @@ class EmployeeResponse {
 
   EmployeeResponse(
       {this.page,
-        this.perPage,
-        this.total,
-        this.totalPages,
-        this.data,
-        this.support});
+      this.perPage,
+      this.total,
+      this.totalPages,
+      this.data,
+      this.support});
 
   EmployeeResponse.fromJson(Map<String, dynamic> json) {
     page = json['page'];
@@ -26,7 +26,7 @@ class EmployeeResponse {
       });
     }
     support =
-    json['support'] != null ? Support.fromJson(json['support']) : null;
+        json['support'] != null ? Support.fromJson(json['support']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -52,7 +52,8 @@ class EmployeeProfile {
   String? lastName;
   String? avatar;
 
-  EmployeeProfile({this.id, this.email, this.firstName, this.lastName, this.avatar});
+  EmployeeProfile(
+      {this.id, this.email, this.firstName, this.lastName, this.avatar});
 
   EmployeeProfile.fromJson(Map<String, dynamic> json) {
     id = json['id'];

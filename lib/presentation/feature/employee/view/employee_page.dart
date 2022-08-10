@@ -40,38 +40,38 @@ class EmployeePage extends GetView<EmployeeController> {
 
   Widget _itemEmployeeProfile(EmployeeProfile employeeProfile) {
     return InkWell(
-      onTap: (){
-
-      },
+      onTap: () {},
       child: SizedBox(
           height: 150,
           child: Column(
             children: [
               Expanded(
                 flex: 1,
-                child: Row(
+                child: Row(children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 140,
+                    height: 140,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.network(employeeProfile.avatar.toString()),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SizedBox(width: 10,),
-                      Container(
-                        width: 140,
-                        height: 140,
-                        child: ClipRRect (
-                          borderRadius: BorderRadius.circular(30),
-                          child: Image.network(employeeProfile.avatar.toString()),
-                        ),
-                      ),
-                      const SizedBox(width: 10,),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('${employeeProfile.firstName} ${employeeProfile.lastName}'),
-                          Text(employeeProfile.email.toString())
-                        ],
-                      )
-
-                    ]
-                ),
+                      Text(
+                          '${employeeProfile.firstName} ${employeeProfile.lastName}'),
+                      Text(employeeProfile.email.toString())
+                    ],
+                  )
+                ]),
               ),
               Container(
                 color: Colors.black12,
@@ -79,8 +79,7 @@ class EmployeePage extends GetView<EmployeeController> {
                 height: 1,
               )
             ],
-          )
-      ),
+          )),
     );
   }
 }

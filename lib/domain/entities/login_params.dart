@@ -5,6 +5,4 @@ class LoginParams {
   late LoginBodyWithPassword loginBodyWithPassword;
 }
 
-enum LoginType{
-  loginWithPassword
-}
+enum LoginType { loginWithPassword }

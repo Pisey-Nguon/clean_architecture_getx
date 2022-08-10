@@ -1,14 +1,24 @@
-import 'package:clean_architecture_getx/domain/entities/error_response.dart';
 
-abstract class BaseResult<SuccessResponse>{
+abstract class BaseResult<SuccessResponse> {
   SuccessResponse? successResponse;
   ErrorResponse? errorResponse;
   RequestStatus requestStatus = RequestStatus.failed;
 }
 
-enum RequestStatus{
-  success,
-  noInternet,
-  failed,
-  somethingWentWrong
+enum RequestStatus { success, noInternet, failed, somethingWentWrong }
+
+class ErrorResponse {
+  final String error;
+
+  ErrorResponse({required this.error});
+
+  factory ErrorResponse.fromJson(Map<String, dynamic> json) {
+    return ErrorResponse(error: json['error']);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['error'] = error;
+    return data;
+  }
 }

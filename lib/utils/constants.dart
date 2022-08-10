@@ -1,3 +1,3 @@
-class Constants{
+class Constants {
   static const keyToken = "keyToken";
 }
