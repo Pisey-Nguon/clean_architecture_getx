@@ -24,7 +24,7 @@ class EmployeeController extends GetxController with StateMixin<List<EmployeePro
     change(employeeProfiles, status: RxStatus.loading());
     var params = EmployeeParams();
     params.employeeType = EmployeeType.getUser;
-    params.employeeQuery = EmployeeQuery(page: "1", perPage: 1);
+    params.employeeQuery = EmployeeQuery(page: 1, perPage: 1);
     final result = await _employeeUseCase.call(params);
     switch (result.requestStatus) {
       case RequestStatus.success:

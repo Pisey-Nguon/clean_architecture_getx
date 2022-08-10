@@ -1,5 +1,5 @@
 class EmployeeQuery {
-  final String page;
+  final int page;
   final int perPage;
 
   EmployeeQuery({required this.page,required this.perPage});
@@ -10,8 +10,8 @@ class EmployeeQuery {
 
   Map<String, dynamic> toJson() {
     return {
-      "page": page,
-      "per_page": perPage
+      "page": page.toString(),
+      "per_page": perPage.toString()
     };
   }
 }

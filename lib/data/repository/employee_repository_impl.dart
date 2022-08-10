@@ -18,8 +18,7 @@ class EmployeeRepositoryImpl extends EmployeeRepository {
     var employeeResult = EmployeeResult();
     try {
       final apiResponse = await _apiDataSource.getEmployee(employeeQuery: employeeQuery);
-      employeeResult.requestStatus =
-          ApiHelper.errorHandler(apiResponse: apiResponse);
+      employeeResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
       switch (employeeResult.requestStatus) {
         case RequestStatus.success:
           employeeResult.successResponse =
