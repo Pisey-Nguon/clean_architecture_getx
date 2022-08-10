@@ -38,6 +38,7 @@ dependencies:
   get_storage: ^2.0.3
   email_validator: ^2.0.1
   flutter_displaymode: ^0.4.0
+  flutter_paginator_ns: ^2.0.0
   logger: ^1.1.0
 
 dev_dependencies:

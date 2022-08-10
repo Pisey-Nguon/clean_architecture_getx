@@ -1,6 +1,7 @@
 import 'package:clean_architecture_getx/domain/entities/employee_response.dart';
 import 'package:clean_architecture_getx/presentation/feature/employee/controller/employee_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_paginator_ns/flutter_paginator.dart';
 import 'package:get/get.dart';
 
 class EmployeePage extends GetView<EmployeeController> {
