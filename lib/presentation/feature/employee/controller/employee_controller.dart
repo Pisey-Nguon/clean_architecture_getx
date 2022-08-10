@@ -1,64 +1,55 @@
 import 'package:clean_architecture_getx/domain/entities/employee_params.dart';
-import 'package:clean_architecture_getx/domain/entities/employee_query.dart';
+import 'package:clean_architecture_getx/domain/entities/employee_query_delay.dart';
 import 'package:clean_architecture_getx/domain/entities/employee_response.dart';
+import 'package:clean_architecture_getx/domain/entities/employee_result.dart';
 import 'package:clean_architecture_getx/domain/usecase/employee_usecase.dart';
 import 'package:get/get.dart';
 
 import '../../../../base/base_result.dart';
 
-class EmployeeController extends GetxController with StateMixin<List<EmployeeProfile>>,ScrollMixin {
+class EmployeeController extends GetxController{
   final EmployeeUseCase _employeeUseCase;
 
-  var employeeProfiles = RxList<EmployeeProfile>();
 
   EmployeeController({required EmployeeUseCase employeeUseCase})
       : _employeeUseCase = employeeUseCase;
 
-  final int repositoriesPerPage = 10;
-  int page = 1;
-  bool getFirstData = false;
-  bool lastPage = false;
+
+  List<EmployeeProfile> listItemsGetter(EmployeeResult employeeResult) {
+    List<EmployeeProfile> list = [];
+    employeeResult.successResponse?.data?.forEach((value) {
+      list.add(value);
+    });
+    return list;
+  }
+
 
   @override
   void onInit() {
-    getEmployeeProfiles();
     super.onInit();
   }
 
-  Future<void> getEmployeeProfiles() async {
-    change(employeeProfiles, status: RxStatus.loading());
-    var params = EmployeeParams();
-    params.employeeType = EmployeeType.getUser;
-    params.employeeQuery = EmployeeQuery(page: page, perPage: repositoriesPerPage);
-    final result = await _employeeUseCase.call(params);
-    switch (result.requestStatus) {
-      case RequestStatus.success:
-        employeeProfiles.value = result.successResponse!.data!;
-        change(employeeProfiles, status: RxStatus.success());
-        break;
-      case RequestStatus.noInternet:
-        change(employeeProfiles, status: RxStatus.error("No internet"));
-        break;
-      case RequestStatus.failed:
-        change(employeeProfiles,
-            status: RxStatus.error(result.errorResponse!.error));
-        break;
-      case RequestStatus.somethingWentWrong:
-        change(employeeProfiles,
-            status: RxStatus.error("Something went wrong"));
-        break;
+  int totalItem(EmployeeResult employeeResult){
+    if(employeeResult.successResponse != null){
+      return employeeResult.successResponse!.total!;
+    }else{
+      return 0;
     }
   }
 
-  @override
-  Future<void> onEndScroll() {
-
-    throw UnimplementedError();
+  bool pageErrorChecker(EmployeeResult employeeResult){
+    if(employeeResult.requestStatus == RequestStatus.success){
+      return false;
+    }else{
+      return true;
+    }
   }
 
-  @override
-  Future<void> onTopScroll() {
-    // TODO: implement onTopScroll
-    throw UnimplementedError();
+  Future<EmployeeResult> getEmployeeProfiles(int page) async {
+    var params = EmployeeParams();
+    params.employeeType = EmployeeType.getUserDelay;
+    params.employeeQueryDelay = EmployeeQueryDelay(page: page,perPage: 6,delay: 3);
+    return await _employeeUseCase.call(params);
   }
+
 }

@@ -1,5 +1,6 @@
 import 'package:clean_architecture_getx/data/datasource/api_datasource.dart';
 import 'package:clean_architecture_getx/domain/entities/employee_query.dart';
+import 'package:clean_architecture_getx/domain/entities/employee_query_delay.dart';
 import 'package:clean_architecture_getx/domain/entities/employee_response.dart';
 import 'package:clean_architecture_getx/domain/entities/employee_result.dart';
 import 'package:clean_architecture_getx/domain/repository/employee_repository.dart';
@@ -18,6 +19,34 @@ class EmployeeRepositoryImpl extends EmployeeRepository {
     var employeeResult = EmployeeResult();
     try {
       final apiResponse = await _apiDataSource.getEmployee(employeeQuery: employeeQuery);
+      employeeResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
+      switch (employeeResult.requestStatus) {
+        case RequestStatus.success:
+          employeeResult.successResponse =
+              EmployeeResponse.fromJson(apiResponse.body);
+          break;
+        case RequestStatus.noInternet:
+          break;
+        case RequestStatus.failed:
+          employeeResult.errorResponse = ErrorResponse.fromJson(apiResponse.body);
+          break;
+        case RequestStatus.somethingWentWrong:
+          break;
+      }
+    } catch (e) {
+      _apiDataSource.printErrorService(e.toString());
+      employeeResult.requestStatus = RequestStatus.somethingWentWrong;
+    }
+
+    return employeeResult;
+  }
+
+  @override
+  Future<EmployeeResult> getEmployeeDelay({required EmployeeQueryDelay employeeQueryDelay}) async {
+    _apiDataSource.printQuery(employeeQueryDelay.toJson());
+    var employeeResult = EmployeeResult();
+    try {
+      final apiResponse = await _apiDataSource.getEmployeeDelay(employeeQueryDelay: employeeQueryDelay);
       employeeResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
       switch (employeeResult.requestStatus) {
         case RequestStatus.success:

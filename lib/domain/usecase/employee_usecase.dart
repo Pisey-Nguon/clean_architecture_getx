@@ -19,6 +19,9 @@ class EmployeeUseCaseImpl extends EmployeeUseCase {
       case EmployeeType.getUser:
         employeeResult = await _employeeRepository.getEmployee(employeeQuery: params.employeeQuery);
         break;
+      case EmployeeType.getUserDelay:
+        employeeResult = await _employeeRepository.getEmployeeDelay(employeeQueryDelay: params.employeeQueryDelay);
+        break;
     }
     return employeeResult;
   }
