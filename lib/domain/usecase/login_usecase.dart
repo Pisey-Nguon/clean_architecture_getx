@@ -1,24 +1,15 @@
-import 'package:clean_architecture_getx/base/base_usecase.dart';
-import 'package:clean_architecture_getx/domain/entities/login_params.dart';
+import 'package:clean_architecture_getx/domain/entities/body/login_body_with_password.dart';
 import 'package:clean_architecture_getx/domain/repository/login_repository.dart';
 
-import '../entities/login_result.dart';
+import '../entities/result/login_result.dart';
 
-abstract class LoginUseCase extends BaseUseCase<LoginResult, LoginParams> {}
-
-class LoginUseCaseImpl extends LoginUseCase {
+class LoginUseCase {
   final LoginRepository _loginRepository;
 
-  LoginUseCaseImpl({required LoginRepository loginRepository})
+  LoginUseCase({required LoginRepository loginRepository})
       : _loginRepository = loginRepository;
 
-  @override
-  Future<LoginResult> call(LoginParams params) async {
-    var loginResult = LoginResult();
-    switch (params.loginType) {
-      case LoginType.loginWithPassword:
-        loginResult = await _loginRepository.loginWithPassword(loginBodyWithPassword: params.loginBodyWithPassword);
-    }
-    return loginResult;
+  Future<LoginResult> password({required LoginBodyWithPassword loginBodyWithPassword}) async{
+    return await _loginRepository.loginWithPassword(loginBodyWithPassword: loginBodyWithPassword);
   }
 }

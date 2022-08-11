@@ -1,11 +1,11 @@
-import 'package:clean_architecture_getx/domain/entities/employee_params.dart';
-import 'package:clean_architecture_getx/domain/entities/employee_query_delay.dart';
-import 'package:clean_architecture_getx/domain/entities/employee_response.dart';
-import 'package:clean_architecture_getx/domain/entities/employee_result.dart';
+import 'package:clean_architecture_getx/domain/entities/query/employee_delay_query.dart';
+import 'package:clean_architecture_getx/domain/entities/response/data_profile_info.dart';
+import 'package:clean_architecture_getx/domain/entities/result/employee_result.dart';
 import 'package:clean_architecture_getx/domain/usecase/employee_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paginator_ns/flutter_paginator.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import '../../../../base/base_result.dart';
 
@@ -17,10 +17,11 @@ class EmployeeController extends GetxController{
       : _employeeUseCase = employeeUseCase;
 
   final GlobalKey<PaginatorState> paginateGlobalKey = GlobalKey();
+  final box = GetStorage();
 
 
-  List<EmployeeProfile> listItemsGetter(EmployeeResult employeeResult) {
-    List<EmployeeProfile> list = [];
+  List<DataProfileInfo> listItemsGetter(EmployeeResult employeeResult) {
+    List<DataProfileInfo> list = [];
     employeeResult.successResponse?.data?.forEach((value) {
       list.add(value);
     });
@@ -46,10 +47,8 @@ class EmployeeController extends GetxController{
   }
 
   Future<EmployeeResult> getEmployeeProfiles(int page) async {
-    var params = EmployeeParams();
-    params.employeeType = EmployeeType.getUserDelay;
-    params.employeeQueryDelay = EmployeeQueryDelay(page: page,perPage: 6,delay: 3);
-    return await _employeeUseCase.call(params);
+    var employeeDelayQuery = EmployeeDelayQuery(page: page,perPage: 6,delay: 3);
+    return await _employeeUseCase.getEmployeeDelay(employeeDelayQuery: employeeDelayQuery);
   }
 
 }

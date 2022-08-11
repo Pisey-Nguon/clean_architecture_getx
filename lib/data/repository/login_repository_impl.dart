@@ -1,7 +1,7 @@
 import 'package:clean_architecture_getx/data/datasource/api_datasource.dart';
-import 'package:clean_architecture_getx/domain/entities/login_body_with_password.dart';
-import 'package:clean_architecture_getx/domain/entities/login_response.dart';
-import 'package:clean_architecture_getx/domain/entities/login_result.dart';
+import 'package:clean_architecture_getx/domain/entities/body/login_body_with_password.dart';
+import 'package:clean_architecture_getx/domain/entities/response/login_response.dart';
+import 'package:clean_architecture_getx/domain/entities/result/login_result.dart';
 import 'package:clean_architecture_getx/domain/repository/login_repository.dart';
 import 'package:clean_architecture_getx/utils/api_helper.dart';
 

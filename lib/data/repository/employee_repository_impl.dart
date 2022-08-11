@@ -1,8 +1,8 @@
 import 'package:clean_architecture_getx/data/datasource/api_datasource.dart';
-import 'package:clean_architecture_getx/domain/entities/employee_query.dart';
-import 'package:clean_architecture_getx/domain/entities/employee_query_delay.dart';
-import 'package:clean_architecture_getx/domain/entities/employee_response.dart';
-import 'package:clean_architecture_getx/domain/entities/employee_result.dart';
+import 'package:clean_architecture_getx/domain/entities/query/employee_delay_query.dart';
+import 'package:clean_architecture_getx/domain/entities/query/employee_query.dart';
+import 'package:clean_architecture_getx/domain/entities/response/employee_response.dart';
+import 'package:clean_architecture_getx/domain/entities/result/employee_result.dart';
 import 'package:clean_architecture_getx/domain/repository/employee_repository.dart';
 import 'package:clean_architecture_getx/utils/api_helper.dart';
 
@@ -42,7 +42,7 @@ class EmployeeRepositoryImpl extends EmployeeRepository {
   }
 
   @override
-  Future<EmployeeResult> getEmployeeDelay({required EmployeeQueryDelay employeeQueryDelay}) async {
+  Future<EmployeeResult> getEmployeeDelay({required EmployeeDelayQuery employeeQueryDelay}) async {
     _apiDataSource.printQuery(employeeQueryDelay.toJson());
     var employeeResult = EmployeeResult();
     try {

@@ -8,7 +8,7 @@ class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.put<LoginRepository>(LoginRepositoryImpl(apiDataSource: Get.find()));
-    Get.put<LoginUseCase>(LoginUseCaseImpl(loginRepository: Get.find()));
+    Get.put<LoginUseCase>(LoginUseCase(loginRepository: Get.find()));
     Get.put<HomeController>(HomeController(loginUseCase: Get.find()));
   }
 }

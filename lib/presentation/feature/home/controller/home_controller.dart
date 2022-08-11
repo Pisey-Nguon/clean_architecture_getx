@@ -1,5 +1,4 @@
-import 'package:clean_architecture_getx/domain/entities/login_body_with_password.dart';
-import 'package:clean_architecture_getx/domain/entities/login_params.dart';
+import 'package:clean_architecture_getx/domain/entities/body/login_body_with_password.dart';
 import 'package:clean_architecture_getx/domain/usecase/login_usecase.dart';
 import 'package:clean_architecture_getx/routes/app_routes.dart';
 import 'package:clean_architecture_getx/utils/constants.dart';
@@ -8,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../../base/base_result.dart';
-import '../../../../domain/entities/login_result.dart';
+import '../../../../domain/entities/result/login_result.dart';
 
 class HomeController extends GetxController {
   final LoginUseCase _loginUseCase;
@@ -33,14 +32,11 @@ class HomeController extends GetxController {
   }
 
   Future<void> loginWithPassword() async {
-    Get.defaultDialog(
-        title: "Loading", content: const CircularProgressIndicator());
-    var loginParams = LoginParams();
-    loginParams.loginType = LoginType.loginWithPassword;
-    loginParams.loginBodyWithPassword = LoginBodyWithPassword(
+    Get.defaultDialog(title: "Loading", content: const CircularProgressIndicator());
+    var loginBodyWithPassword = LoginBodyWithPassword(
         email: emailEditController.value.text,
         password: passwordEditController.value.text);
-    final LoginResult loginResult = await _loginUseCase.call(loginParams);
+    final LoginResult loginResult = await _loginUseCase.password(loginBodyWithPassword: loginBodyWithPassword);
     switch (loginResult.requestStatus) {
       case RequestStatus.success:
         Get.back();
