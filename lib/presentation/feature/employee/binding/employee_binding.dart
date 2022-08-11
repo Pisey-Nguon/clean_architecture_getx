@@ -11,7 +11,5 @@ class EmployeeBinding extends Bindings {
         EmployeeRepositoryImpl(apiDataSource: Get.find()));
     Get.put<EmployeeUseCase>(
         EmployeeUseCaseImpl(employeeRepository: Get.find()));
-    Get.put<EmployeeController>(
-        EmployeeController(employeeUseCase: Get.find()));
   }
 }

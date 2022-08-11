@@ -3,6 +3,8 @@ import 'package:clean_architecture_getx/domain/entities/employee_query_delay.dar
 import 'package:clean_architecture_getx/domain/entities/employee_response.dart';
 import 'package:clean_architecture_getx/domain/entities/employee_result.dart';
 import 'package:clean_architecture_getx/domain/usecase/employee_usecase.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_paginator_ns/flutter_paginator.dart';
 import 'package:get/get.dart';
 
 import '../../../../base/base_result.dart';
@@ -14,6 +16,8 @@ class EmployeeController extends GetxController{
   EmployeeController({required EmployeeUseCase employeeUseCase})
       : _employeeUseCase = employeeUseCase;
 
+  final GlobalKey<PaginatorState> paginateGlobalKey = GlobalKey();
+
 
   List<EmployeeProfile> listItemsGetter(EmployeeResult employeeResult) {
     List<EmployeeProfile> list = [];
@@ -24,10 +28,6 @@ class EmployeeController extends GetxController{
   }
 
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   int totalItem(EmployeeResult employeeResult){
     if(employeeResult.successResponse != null){
