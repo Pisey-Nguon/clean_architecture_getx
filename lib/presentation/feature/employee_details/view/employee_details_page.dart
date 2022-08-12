@@ -1,5 +1,5 @@
 import 'package:clean_architecture_getx/domain/entities/result/employee_details_result.dart';
-import 'package:clean_architecture_getx/presentation/component/view/state_builder.dart';
+import 'package:clean_architecture_getx/presentation/component/view/state_widget_builder.dart';
 import 'package:clean_architecture_getx/presentation/feature/employee_details/controller/employee_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,7 +33,7 @@ class EmployeeDetailsPage extends StatelessWidget {
   }
 
   Widget _buildBody({required EmployeeDetailsController controller}) {
-    return StateBuilder<EmployeeDetailsResult>(
+    return StateWidgetBuilder<EmployeeDetailsResult>(
       result: controller.employeeDetailsResult,
       successWidget: (result){
         return _columnDetails(result);

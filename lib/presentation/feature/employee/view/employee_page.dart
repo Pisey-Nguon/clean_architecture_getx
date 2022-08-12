@@ -1,5 +1,6 @@
 import 'package:clean_architecture_getx/domain/entities/response/data_profile_info.dart';
 import 'package:clean_architecture_getx/domain/entities/result/employee_result.dart';
+import 'package:clean_architecture_getx/presentation/component/view/state_list_builder.dart';
 import 'package:clean_architecture_getx/presentation/component/view_logic/employee_dropdown_enum.dart';
 import 'package:clean_architecture_getx/presentation/feature/employee/controller/employee_controller.dart';
 import 'package:clean_architecture_getx/routes/app_routes.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_paginator_ns/enums.dart';
 import 'package:flutter_paginator_ns/flutter_paginator.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:paginated_list/paginated_list.dart';
 
 import '../../../../base/base_result.dart';
 
@@ -94,28 +97,48 @@ class EmployeePage extends StatelessWidget {
   }
 
   Widget _buildBody(EmployeeController controller) {
-    return SizedBox(
-      child: Paginator.listView(
-          key: controller.paginateGlobalKey,
-          pageLoadFuture: (page) async {
-            return controller.getEmployeeProfiles(page);
-          },
-          pageItemsGetter: (EmployeeResult employeeResult) {
-            return controller.listItemsGetter(employeeResult);
-          },
-          listItemBuilder: (dynamic itemValue, int index) {
-            return _itemForListLayout(itemValue, index);
-          },
-          loadingWidgetBuilder: () => _loadingRequestEmployeeWidget(),
-          errorWidgetBuilder: (EmployeeResult employeeResult, _) =>
-              _errorRequestEmployeeWidget(employeeResult),
-          emptyListWidgetBuilder: (employeeResult) =>
-              _emptyRequestEmployeeWidget(),
-          totalItemsGetter: (EmployeeResult employeeResult) =>
-              controller.totalItem(employeeResult),
-          pageErrorChecker: (EmployeeResult employeeResult) =>
-              controller.pageErrorChecker(employeeResult)),
+    // return SizedBox(
+    //   child: Paginator.listView(
+    //       key: controller.paginateGlobalKey,
+    //       pageLoadFuture: (page) async {
+    //         return controller.getEmployeeProfiles(page);
+    //       },
+    //       pageItemsGetter: (EmployeeResult employeeResult) {
+    //         return controller.listItemsGetter(employeeResult);
+    //       },
+    //       listItemBuilder: (dynamic itemValue, int index) {
+    //         return _itemForListLayout(itemValue, index);
+    //       },
+    //       loadingWidgetBuilder: () => _loadingRequestEmployeeWidget(),
+    //       errorWidgetBuilder: (EmployeeResult employeeResult, _) =>
+    //           _errorRequestEmployeeWidget(employeeResult),
+    //       emptyListWidgetBuilder: (employeeResult) =>
+    //           _emptyRequestEmployeeWidget(),
+    //       totalItemsGetter: (EmployeeResult employeeResult) =>
+    //           controller.totalItem(employeeResult),
+    //       pageErrorChecker: (EmployeeResult employeeResult) =>
+    //           controller.pageErrorChecker(employeeResult)),
+    // );
+
+    // return StateListBuilder<EmployeeResult,DataProfileInfo>(
+    //     result: controller.employeeResult,
+    //     items: controller.employeeResult.successResponse?.data,
+    //     onLoadMore: (index){
+    //       print("checkStatus page ${index}");
+    //       controller.getEmployeeProfiles();
+    //     },
+    //     itemBuilder: (item,index){
+    //       return _itemForListLayout(item, index);
+    //     },
+    //     emptyWidget: _emptyRequestEmployeeWidget()
+    // );
+
+    return StateListBuilder<DataProfileInfo>(
+        items: controller.dataProfileInfoList,
+        pagingController: controller.pagingController,
+        itemBuilder: (context,item,index)=> _itemForListLayout(item,index),
     );
+
   }
 
   Widget _itemForListLayout(dynamic itemValue, int index) {

@@ -1,14 +1,14 @@
 import 'package:clean_architecture_getx/base/base_result.dart';
 import 'package:flutter/material.dart';
 
-class StateBuilder<T> extends StatelessWidget{
+class StateWidgetBuilder<T> extends StatelessWidget{
 
   final T result;
   final Widget? loadingWidget;
   final Widget Function(T result) successWidget;
-  final Widget Function(ErrorResponse errorResponse) failedWidget;
+  final Widget Function(ErrorResponse errorResponse)? failedWidget;
 
-  const StateBuilder({super.key,required this.result,this.loadingWidget,required this.successWidget, required this.failedWidget});
+  const StateWidgetBuilder({super.key,required this.result,this.loadingWidget,required this.successWidget, this.failedWidget});
 
   @override
   Widget build(BuildContext context) {
