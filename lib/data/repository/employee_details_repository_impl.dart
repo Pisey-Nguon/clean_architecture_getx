@@ -19,6 +19,8 @@ class EmployeeDetailsRepositoryImpl extends EmployeeDetailsRepository{
       employeeDetailsResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
       switch(employeeDetailsResult.requestStatus){
 
+        case RequestStatus.loading:
+          break;
         case RequestStatus.success:
           employeeDetailsResult.successResponse = EmployeeDetailsResponse.fromJson(apiResponse.body);
           break;

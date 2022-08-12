@@ -19,6 +19,6 @@ class ApiDataSource extends BaseService {
   }
 
   Future<Response> getEmployeeDetails({required String employeeId}) async {
-    return await get("api/users/$employeeId");
+    return await get("api/users/50");
   }
 }

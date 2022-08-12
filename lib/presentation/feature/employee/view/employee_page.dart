@@ -201,6 +201,8 @@ class EmployeePage extends StatelessWidget {
 
   Widget _errorRequestEmployeeWidget(EmployeeResult employeeResult) {
     switch (employeeResult.requestStatus) {
+      case RequestStatus.loading:
+        return const SizedBox();
       case RequestStatus.success:
         return const SizedBox();
       case RequestStatus.noInternet:
