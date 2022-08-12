@@ -25,7 +25,7 @@ class EmployeeDetailsPage extends StatelessWidget {
       actions: [
         IconButton(
             onPressed: () {
-              controller.getEmployeeDetails();
+              controller.reloadGetEmployeeDetails();
             },
             icon: const Icon(Icons.refresh))
       ],
