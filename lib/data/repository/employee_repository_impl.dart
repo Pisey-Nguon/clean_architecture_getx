@@ -21,6 +21,8 @@ class EmployeeRepositoryImpl extends EmployeeRepository {
       final apiResponse = await _apiDataSource.getEmployee(employeeQuery: employeeQuery);
       employeeResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
       switch (employeeResult.requestStatus) {
+        case RequestStatus.loading:
+          break;
         case RequestStatus.success:
           employeeResult.successResponse =
               EmployeeResponse.fromJson(apiResponse.body);
@@ -32,6 +34,7 @@ class EmployeeRepositoryImpl extends EmployeeRepository {
           break;
         case RequestStatus.somethingWentWrong:
           break;
+
       }
     } catch (e) {
       _apiDataSource.printErrorService(e.toString());
@@ -49,6 +52,8 @@ class EmployeeRepositoryImpl extends EmployeeRepository {
       final apiResponse = await _apiDataSource.getEmployeeDelay(employeeQueryDelay: employeeQueryDelay);
       employeeResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
       switch (employeeResult.requestStatus) {
+        case RequestStatus.loading:
+          break;
         case RequestStatus.success:
           employeeResult.successResponse =
               EmployeeResponse.fromJson(apiResponse.body);

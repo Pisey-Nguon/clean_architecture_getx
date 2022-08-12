@@ -21,6 +21,8 @@ class LoginRepositoryImpl extends LoginRepository {
       loginResult.requestStatus =
           ApiHelper.errorHandler(apiResponse: apiResponse);
       switch (loginResult.requestStatus) {
+        case RequestStatus.loading:
+          break;
         case RequestStatus.success:
           loginResult.successResponse =
               LoginResponse.fromJson(apiResponse.body);

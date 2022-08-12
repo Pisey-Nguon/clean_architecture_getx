@@ -9,6 +9,7 @@ class FailedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(errorResponse.error),
         ElevatedButton(onPressed: retry, child: const Text("Retry"))

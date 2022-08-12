@@ -35,6 +35,9 @@ class EmployeeDetailsPage extends StatelessWidget {
   Widget _buildBody({required EmployeeDetailsController controller}) {
     return StateWidgetBuilder<EmployeeDetailsResult>(
       result: controller.employeeDetailsResult,
+      retry: (){
+        controller.getEmployeeDetails();
+      },
       successWidget: (result){
         return _columnDetails(result);
       },

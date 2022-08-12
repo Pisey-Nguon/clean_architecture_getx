@@ -8,8 +8,8 @@ class SomethingWentWrongWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(child: Column(
       children: [
-        Text("Something went wrong"),
-        ElevatedButton(onPressed: retry, child: Text("Retry"))
+        const Text("Something went wrong"),
+        ElevatedButton(onPressed: retry, child: const Text("Retry"))
       ],
     ),);
   }

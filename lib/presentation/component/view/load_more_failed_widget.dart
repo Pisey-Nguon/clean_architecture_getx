@@ -6,11 +6,14 @@ class LoadMoreFailedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Column(
-      children: [
-        const Text("Something went wrong"),
-        IconButton(onPressed: retry, icon: const Icon(Icons.refresh))
-      ],
+    return Center(child: Padding(
+      padding: const EdgeInsets.symmetric(vertical:10),
+      child: Column(
+        children: [
+          const Text("Something went wrong"),
+          IconButton(onPressed: retry, icon: const Icon(Icons.refresh))
+        ],
+      ),
     ),);
   }
 }

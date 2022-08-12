@@ -7,6 +7,7 @@ class NoInternetWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text("No internet"),
         ElevatedButton(onPressed: retry, child: const Text("Retry"))
