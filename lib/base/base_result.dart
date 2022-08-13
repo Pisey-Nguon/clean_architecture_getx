@@ -2,10 +2,10 @@
 abstract class BaseResult<SuccessResponse> {
   SuccessResponse? successResponse;
   ErrorResponse? errorResponse;
-  RequestStatus requestStatus = RequestStatus.loading;
+  RequestStatus? requestStatus;
 }
 
-enum RequestStatus {loading, success, noInternet, failed, somethingWentWrong }
+enum RequestStatus { success, noInternet, failed, somethingWentWrong }
 
 class ErrorResponse {
   final String error;

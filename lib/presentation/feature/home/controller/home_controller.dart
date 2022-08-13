@@ -14,15 +14,14 @@ class HomeController extends GetxController {
   HomeController({required LoginUseCase loginUseCase})
       : _loginUseCase = loginUseCase;
 
-  final headerText = "Welcome to clean architecture of Jan Roffer".obs;
+  final formKey = GlobalKey<FormState>();
+  final box = GetStorage();
 
+  var headerText = "Welcome to clean architecture of Jan Roffer";
+  var rememberValue = false;
   var emailEditController = TextEditingController();
   var passwordEditController = TextEditingController();
 
-  final box = GetStorage();
-
-  final formKey = GlobalKey<FormState>();
-  var rememberValue = false.obs;
 
   @override
   void onInit() {
@@ -37,7 +36,7 @@ class HomeController extends GetxController {
         email: emailEditController.value.text,
         password: passwordEditController.value.text);
     final LoginResult loginResult = await _loginUseCase.password(loginBodyWithPassword: loginBodyWithPassword);
-    switch (loginResult.requestStatus) {
+    switch (loginResult.requestStatus!) {
       case RequestStatus.success:
         Get.back();
         box.write(Constants.keyToken, loginResult.successResponse!.token);
@@ -46,17 +45,18 @@ class HomeController extends GetxController {
         });
         break;
       case RequestStatus.noInternet:
-        headerText.value = "No Internet";
+        headerText = "No Internet";
         Get.back();
         break;
       case RequestStatus.failed:
-        headerText.value = loginResult.errorResponse!.error;
+        headerText = loginResult.errorResponse!.error;
         Get.back();
         break;
       case RequestStatus.somethingWentWrong:
-        headerText.value = "Something went wrong";
+        headerText = "Something went wrong";
         Get.back();
         break;
     }
+    update();
   }
 }

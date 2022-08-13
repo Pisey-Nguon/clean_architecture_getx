@@ -21,7 +21,7 @@ class BaseService extends GetConnect {
 
     httpClient.addResponseModifier((request, response) async {
       if(kDebugMode){
-        _logger.i("Url service:\n${request.url} \nResponse: \n${_getPrettyJSONString(response.body)}");
+        _logger.i("Url service:\n${request.url}\nToken: $token\nResponse: \n${_getPrettyJSONString(response.body)}");
       }
       return response;
     });

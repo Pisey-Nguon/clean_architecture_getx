@@ -1,4 +1,3 @@
-import 'package:clean_architecture_getx/base/base_result.dart';
 import 'package:clean_architecture_getx/domain/entities/result/employee_details_result.dart';
 import 'package:clean_architecture_getx/domain/usecase/employee_details_usecase.dart';
 import 'package:get/get.dart';
@@ -13,7 +12,7 @@ class EmployeeDetailsController extends GetxController {
 
 
   void reloadGetEmployeeDetails(){
-    employeeDetailsResult.requestStatus = RequestStatus.loading;
+    employeeDetailsResult.requestStatus = null;
     update();
     getEmployeeDetails();
   }

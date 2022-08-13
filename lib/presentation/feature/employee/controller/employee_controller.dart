@@ -2,7 +2,6 @@ import 'package:clean_architecture_getx/domain/entities/query/employee_query.dar
 import 'package:clean_architecture_getx/domain/entities/response/data_profile_info.dart';
 import 'package:clean_architecture_getx/domain/entities/result/employee_result.dart';
 import 'package:clean_architecture_getx/domain/usecase/employee_usecase.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -25,14 +24,16 @@ class EmployeeController extends GetxController{
 
 
   Future<void> getEmployeeProfiles(int pageKey) async {
-    requestPage += 1;
+    if(pageKey == 0){
+      requestPage = 0;
+    }else{
+      requestPage += 1;
+    }
     var employeeQuery = EmployeeQuery(page: requestPage,perPage: pageSize);
     employeeResult = await _employeeUseCase.getEmployee(employeeQuery: employeeQuery);
 
-    switch(employeeResult.requestStatus){
+    switch(employeeResult.requestStatus!){
 
-      case RequestStatus.loading:
-        break;
       case RequestStatus.success:
         dataProfileInfoList.addAll(employeeResult.successResponse!.data!);
         var isLastPage = employeeResult.successResponse!.data!.length < pageSize;

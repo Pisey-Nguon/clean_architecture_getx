@@ -20,12 +20,9 @@ class LoginRepositoryImpl extends LoginRepository {
       final apiResponse = await _apiDataSource.loginWithPassword(loginBodyWithPassword: loginBodyWithPassword);
       loginResult.requestStatus =
           ApiHelper.errorHandler(apiResponse: apiResponse);
-      switch (loginResult.requestStatus) {
-        case RequestStatus.loading:
-          break;
+      switch (loginResult.requestStatus!) {
         case RequestStatus.success:
-          loginResult.successResponse =
-              LoginResponse.fromJson(apiResponse.body);
+          loginResult.successResponse = LoginResponse.fromJson(apiResponse.body);
           break;
         case RequestStatus.noInternet:
           break;

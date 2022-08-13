@@ -17,10 +17,8 @@ class EmployeeDetailsRepositoryImpl extends EmployeeDetailsRepository{
     try{
       var apiResponse = await _apiDataSource.getEmployeeDetails(employeeId: employeeId);
       employeeDetailsResult.requestStatus = ApiHelper.errorHandler(apiResponse: apiResponse);
-      switch(employeeDetailsResult.requestStatus){
+      switch(employeeDetailsResult.requestStatus!){
 
-        case RequestStatus.loading:
-          break;
         case RequestStatus.success:
           employeeDetailsResult.successResponse = EmployeeDetailsResponse.fromJson(apiResponse.body);
           break;

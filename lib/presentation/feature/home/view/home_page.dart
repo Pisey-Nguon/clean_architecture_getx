@@ -3,14 +3,19 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomePage extends GetView<HomeController> {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: _buildBody(context),
+    return GetBuilder<HomeController>(
+      init: HomeController(loginUseCase: Get.find()),
+      builder: (controller) {
+        return Scaffold(
+          appBar: _buildAppBar(),
+          body: _buildBody(context,controller),
+        );
+      }
     );
   }
 
@@ -20,7 +25,7 @@ class HomePage extends GetView<HomeController> {
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody(BuildContext context,HomeController controller) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints boxConstraints) {
       return SingleChildScrollView(
@@ -32,14 +37,12 @@ class HomePage extends GetView<HomeController> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Obx(
-                  () => Text(
-                    controller.headerText.value,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
-                    ),
+                Text(
+                  controller.headerText,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
                   ),
                 ),
                 const SizedBox(
@@ -84,18 +87,17 @@ class HomePage extends GetView<HomeController> {
                           ),
                         ),
                       ),
-                      Obx(() {
-                        return CheckboxListTile(
-                          title: const Text("Remember me"),
-                          contentPadding: EdgeInsets.zero,
-                          value: controller.rememberValue.value,
-                          activeColor: Theme.of(context).colorScheme.primary,
-                          onChanged: (newValue) {
-                            controller.rememberValue.value = newValue!;
-                          },
-                          controlAffinity: ListTileControlAffinity.leading,
-                        );
-                      }),
+                     CheckboxListTile(
+                title: const Text("Remember me"),
+            contentPadding: EdgeInsets.zero,
+            value: controller.rememberValue,
+            activeColor: Theme.of(context).colorScheme.primary,
+            onChanged: (newValue) {
+              controller.rememberValue = newValue!;
+              controller.update();
+            },
+            controlAffinity: ListTileControlAffinity.leading,
+          ),
                       const SizedBox(
                         height: 20,
                       ),

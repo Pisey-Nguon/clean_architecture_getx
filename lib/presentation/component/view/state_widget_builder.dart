@@ -18,27 +18,29 @@ class StateWidgetBuilder<T> extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     var data = result as BaseResult;
-    switch(data.requestStatus){
-      case RequestStatus.loading:
-        if(loadingWidget != null){
-          return loadingWidget!;
-        }else{
-          return const LoadPageWidget();
-        }
-        return const Center(child: CircularProgressIndicator(),);
-      case RequestStatus.success:
-        return successWidget.call(result);
-      case RequestStatus.noInternet:
-        return NoInternetWidget(retry: retry);
-      case RequestStatus.failed:
-        if(data.errorResponse != null){
-          return FailedWidget(retry: retry, errorResponse: data.errorResponse!);
-        }else{
+    if(data.requestStatus == null){
+      if(loadingWidget != null){
+        return loadingWidget!;
+      }else{
+        return const LoadPageWidget();
+      }
+    }else{
+      switch(data.requestStatus!){
+        case RequestStatus.success:
+          return successWidget.call(result);
+        case RequestStatus.noInternet:
+          return NoInternetWidget(retry: retry);
+        case RequestStatus.failed:
+          if(data.errorResponse != null){
+            return FailedWidget(retry: retry, errorResponse: data.errorResponse!);
+          }else{
+            return SomethingWentWrongWidget(retry: retry);
+          }
+        case RequestStatus.somethingWentWrong:
           return SomethingWentWrongWidget(retry: retry);
-        }
-      case RequestStatus.somethingWentWrong:
-        return SomethingWentWrongWidget(retry: retry);
+      }
     }
+
   }
 
 
