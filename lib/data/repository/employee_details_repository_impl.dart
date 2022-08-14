@@ -5,6 +5,7 @@ import 'package:clean_architecture_getx/domain/repository/employee_details_repos
 import 'package:clean_architecture_getx/utils/api_helper.dart';
 
 import '../../base/base_result.dart';
+import '../../domain/entities/response/error_response.dart';
 
 class EmployeeDetailsRepositoryImpl extends EmployeeDetailsRepository{
   final ApiDataSource _apiDataSource;
@@ -25,6 +26,7 @@ class EmployeeDetailsRepositoryImpl extends EmployeeDetailsRepository{
         case RequestStatus.noInternet:
           break;
         case RequestStatus.failed:
+
           employeeDetailsResult.errorResponse = ErrorResponse.fromJson(apiResponse.body);
           break;
         case RequestStatus.somethingWentWrong:

@@ -5,7 +5,9 @@ import 'package:clean_architecture_getx/presentation/component/view/no_internet_
 import 'package:clean_architecture_getx/presentation/component/view/something_went_wrong_widget.dart';
 import 'package:flutter/material.dart';
 
-class StateWidgetBuilder<T> extends StatelessWidget{
+import '../../../domain/entities/response/error_response.dart';
+
+class StateViewBuilder<T> extends StatelessWidget{
 
   final T result;
   final Function() retry;
@@ -13,7 +15,7 @@ class StateWidgetBuilder<T> extends StatelessWidget{
   final Widget Function(T result) successWidget;
   final Widget Function(ErrorResponse errorResponse)? failedWidget;
 
-  const StateWidgetBuilder({super.key,required this.result,required this.retry,this.loadingWidget,required this.successWidget, this.failedWidget});
+  const StateViewBuilder({super.key,required this.result,required this.retry,this.loadingWidget,required this.successWidget, this.failedWidget});
 
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,7 @@ import 'package:clean_architecture_getx/domain/repository/login_repository.dart'
 import 'package:clean_architecture_getx/utils/api_helper.dart';
 
 import '../../base/base_result.dart';
+import '../../domain/entities/response/error_response.dart';
 
 class LoginRepositoryImpl extends LoginRepository {
   final ApiDataSource _apiDataSource;

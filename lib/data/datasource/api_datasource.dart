@@ -7,18 +7,18 @@ import 'package:get/get.dart';
 class ApiDataSource extends BaseService {
 
   Future<Response<dynamic>> loginWithPassword({required LoginBodyWithPassword loginBodyWithPassword})async{
-    return await post("api/login", loginBodyWithPassword.toJson());
+    return await methodPost("api/login", loginBodyWithPassword.toJson());
   }
 
   Future<Response> getEmployee({required EmployeeQuery employeeQuery}) async {
-    return await get("api/users", query: employeeQuery.toJson());
+    return await methodGet("api/users",query: employeeQuery.toJson());
   }
 
   Future<Response> getEmployeeDelay({required EmployeeDelayQuery employeeQueryDelay}) async {
-    return await get("api/users", query: employeeQueryDelay.toJson());
+    return await methodGet("api/users", query: employeeQueryDelay.toJson());
   }
 
   Future<Response> getEmployeeDetails({required String employeeId}) async {
-    return await get("api/users/$employeeId");
+    return await methodGet("api/users/$employeeId");
   }
 }

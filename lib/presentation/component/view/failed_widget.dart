@@ -1,5 +1,6 @@
-import 'package:clean_architecture_getx/base/base_result.dart';
 import 'package:flutter/material.dart';
+
+import '../../../domain/entities/response/error_response.dart';
 
 class FailedWidget extends StatelessWidget {
   final Function() retry;

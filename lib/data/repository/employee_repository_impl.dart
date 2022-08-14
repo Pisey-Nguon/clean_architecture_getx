@@ -7,6 +7,7 @@ import 'package:clean_architecture_getx/domain/repository/employee_repository.da
 import 'package:clean_architecture_getx/utils/api_helper.dart';
 
 import '../../base/base_result.dart';
+import '../../domain/entities/response/error_response.dart';
 
 class EmployeeRepositoryImpl extends EmployeeRepository {
   final ApiDataSource _apiDataSource;

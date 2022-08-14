@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../../../base/base_result.dart';
+import '../../../../domain/entities/response/error_response.dart';
 
 class EmployeeController extends GetxController{
   final EmployeeUseCase _employeeUseCase;

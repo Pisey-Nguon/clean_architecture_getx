@@ -1,5 +1,6 @@
 import 'package:clean_architecture_getx/domain/entities/result/employee_details_result.dart';
-import 'package:clean_architecture_getx/presentation/component/view/state_widget_builder.dart';
+import 'package:clean_architecture_getx/presentation/component/view/failed_widget.dart';
+import 'package:clean_architecture_getx/presentation/component/view/state_view_builder.dart';
 import 'package:clean_architecture_getx/presentation/feature/employee_details/controller/employee_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ class EmployeeDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<EmployeeDetailsController>(
+      init: EmployeeDetailsController(employeeDetailsUseCase: Get.find()),
       builder: (controller) {
         return Scaffold(
           appBar: _buildAppBar(controller: controller),
@@ -33,7 +35,7 @@ class EmployeeDetailsPage extends StatelessWidget {
   }
 
   Widget _buildBody({required EmployeeDetailsController controller}) {
-    return StateWidgetBuilder<EmployeeDetailsResult>(
+    return StateViewBuilder<EmployeeDetailsResult>(
       result: controller.employeeDetailsResult,
       retry: (){
         controller.getEmployeeDetails();
@@ -42,7 +44,9 @@ class EmployeeDetailsPage extends StatelessWidget {
         return _columnDetails(result);
       },
       failedWidget: (errorResponse){
-        return _errorWidget(errorResponse.error);
+        return FailedWidget(retry: (){
+          controller.reloadGetEmployeeDetails();
+        }, errorResponse: errorResponse);
       },
     );
   }
@@ -119,21 +123,4 @@ class EmployeeDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _loadingWidget() {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-
-  Widget _errorWidget(String e) {
-    return Center(
-      child: Text(e),
-    );
-  }
-
-  Widget _userNotFound() {
-    return const Center(
-      child: Text("User not found."),
-    );
-  }
 }
