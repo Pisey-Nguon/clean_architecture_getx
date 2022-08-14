@@ -2,6 +2,7 @@ import 'package:clean_architecture_getx/domain/entities/query/employee_query.dar
 import 'package:clean_architecture_getx/domain/entities/response/data_profile_info.dart';
 import 'package:clean_architecture_getx/domain/entities/result/employee_result.dart';
 import 'package:clean_architecture_getx/domain/usecase/employee_usecase.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -62,6 +63,12 @@ class EmployeeController extends GetxController{
     result.requestStatus = RequestStatus.failed;
     result.errorResponse = ErrorResponse(error: "This is error");
     pagingController.error = result;
+  }
+  void changeToCambodia(){
+    Get.updateLocale(const Locale("km","KH"));
+  }
+  void changeToEnglish(){
+    Get.updateLocale(const Locale("en","US"));
   }
 
   @override

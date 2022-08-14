@@ -38,8 +38,8 @@ dependencies:
   get_storage: ^2.0.3
   email_validator: ^2.0.1
   flutter_displaymode: ^0.4.0
-  logger: ^1.1.0
   infinite_scroll_pagination: ^3.2.0
+  logger: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -80,8 +80,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-   assets:
-     - assets/
+  assets:
+    - assets/icon/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,3 +1,5 @@
+import 'package:clean_architecture_getx/assets/app_icon.dart';
+import 'package:clean_architecture_getx/assets/app_local.dart';
 import 'package:clean_architecture_getx/domain/entities/response/data_profile_info.dart';
 import 'package:clean_architecture_getx/presentation/component/view/state_list_builder.dart';
 import 'package:clean_architecture_getx/presentation/component/view_logic/employee_dropdown_enum.dart';
@@ -23,8 +25,14 @@ class EmployeePage extends StatelessWidget {
 
   AppBar _buildAppBar(EmployeeController controller) {
     return AppBar(
-      title: const Text("Employee"),
+      title: Text(AppLocal.employee.tr),
       actions: [
+        IconButton(onPressed: (){
+          controller.changeToCambodia();
+        }, icon: Image.asset(AppIcon.flagCambodia)),
+        IconButton(onPressed: (){
+          controller.changeToEnglish();
+        }, icon: Image.asset(AppIcon.flagEnglish)),
         PopupMenuButton<EmployeeDropDownEnum>(
           icon: const Icon(Icons.more_vert),
           onSelected: (value) {

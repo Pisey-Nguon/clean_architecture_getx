@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:clean_architecture_getx/assets/local_string.dart';
 
 void main() async {
   await GetStorage.init();
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
+      locale: const Locale("en_US","km_KH"),
+      translations: LocaleString(),
+      fallbackLocale: const Locale("en_US"),
       initialBinding: MainBinding(),
       getPages: AppPages.routes,
       initialRoute: AppPages.initial(),
