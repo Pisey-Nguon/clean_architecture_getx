@@ -5,7 +5,7 @@ import 'package:clean_architecture_getx/presentation/feature/employee_details/vi
 import 'package:clean_architecture_getx/presentation/feature/home/binding/home_binding.dart';
 import 'package:clean_architecture_getx/presentation/feature/home/view/home_page.dart';
 import 'package:clean_architecture_getx/routes/app_routes.dart';
-import 'package:clean_architecture_getx/utils/constants.dart';
+import 'package:clean_architecture_getx/assets/constants.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

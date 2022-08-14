@@ -122,5 +122,4 @@ class EmployeeDetailsPage extends StatelessWidget {
       ],
     );
   }
-
 }

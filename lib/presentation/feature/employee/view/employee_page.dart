@@ -3,7 +3,7 @@ import 'package:clean_architecture_getx/presentation/component/view/state_list_b
 import 'package:clean_architecture_getx/presentation/component/view_logic/employee_dropdown_enum.dart';
 import 'package:clean_architecture_getx/presentation/feature/employee/controller/employee_controller.dart';
 import 'package:clean_architecture_getx/routes/app_routes.dart';
-import 'package:clean_architecture_getx/utils/constants.dart';
+import 'package:clean_architecture_getx/assets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

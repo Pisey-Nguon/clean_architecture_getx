@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:clean_architecture_getx/domain/entities/body/refresh_token_body.dart';
 import 'package:clean_architecture_getx/domain/entities/response/refresh_token_response.dart';
 import 'package:clean_architecture_getx/utils/api_helper.dart';
-import 'package:clean_architecture_getx/utils/constants.dart';
+import 'package:clean_architecture_getx/assets/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:get_storage/get_storage.dart';
@@ -20,7 +20,7 @@ class BaseService extends GetConnect {
   void onInit() {
     // add your local storage here to load for every request
     _token = box.read(Constants.keyToken);
-    httpClient.baseUrl = "https://reqres.in/";
+    httpClient.baseUrl = _getBaseUrl();
     httpClient.defaultContentType = "application/json";
     httpClient.timeout = const Duration(seconds: 8);
 
@@ -32,6 +32,14 @@ class BaseService extends GetConnect {
     });
 
     super.onInit();
+  }
+
+  String _getBaseUrl(){
+    if(kDebugMode){
+      return "https://reqres.in/";
+    }else{
+      return "https://reqres.in/";
+    }
   }
 
   String _getPrettyJSONString(jsonObject) {
@@ -52,8 +60,7 @@ class BaseService extends GetConnect {
   }
 
   Future<Response<dynamic>> _requestRefreshToken() async {
-    var currentToken = box.read(Constants.keyToken);
-    var refreshTokenBody = RefreshTokenBody(currentToken: currentToken);
+    var refreshTokenBody = RefreshTokenBody(currentToken: _token);
     return await post("api/refresh/token", refreshTokenBody.toJson());
   }
 
